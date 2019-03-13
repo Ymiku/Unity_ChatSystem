@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{0C621E5D-8955-3BFD-BD35-D977F40B0E89}</ProjectGuid>
+    <ProjectGuid>{1B03521D-F31C-3173-3A8E-EA7C843D1E13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -57,7 +57,6 @@
      <Compile Include="Assets\Node_Editor_Framework\Editor\Node_Editor\RTCanvasCalculatorEditor.cs" />
      <Compile Include="Assets\Node_Editor_Framework\Editor\Node_Editor\RTNodeEditorInspector.cs" />
      <None Include="Assets\Node_Editor_Framework\Node_Editor\Resources\Shader\LineShader.shader" />
-     <None Include="Assets\Node Canvas.xml" />
      <None Include="Assets\Node_Editor_Framework\Node_Editor\Utilities\link.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.2.5f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -125,9 +124,6 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.2.5f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="LitJson">
- <HintPath>D:/GitHub/Node_Editor_Framework/Assets/LitJson.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/ProgramData/Unity/cache/packages/packages.unity.com/com.unity.ads@1.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -146,7 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{A42713BD-1DA6-5764-F5FA-59954C6B3EE4}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{1325E462-934E-6DAC-0B27-A8E7448ABCD8}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

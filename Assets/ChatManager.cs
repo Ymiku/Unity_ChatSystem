@@ -1,16 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NodeEditorFramework;
+public class ChatManager{
+	public static ChatManager Instance;
+	int curPairID = 0;
+	Node curRunningNode;
+	Node curFocusNode;
+	public Dictionary<string,int> name2Id = new Dictionary<string, int> {
+		{ "Tom",0 },
+		{ "Jenny",0 },
+	};
+	public void Enter(string name,string name2)
+	{
+		curPairID = GetPairID (name,name2);
+	}
+	public Node GetNodeByID(int nodeID)
+	{
+		return null;
+	}
+	int GetPairID(string name,string name2)
+	{
+		int id = name2Id [name];
+		int id2 = name2Id [name2];
+		if (id < id2) {
+			return id << 8 + id2;
+		}
+		return id2 << 8 + id;
+	}
 
-public class ChatManager : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+	int GetResumeSectionID()
+	{
+		return 1;
+	}
+	public int GetResumeNodeID()
+	{
+		return 1;
+	}
+	void SetResumeSectionID()
+	{
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+	void SetResumeNodeID()
+	{
+		
+	}
+	//Load
+	void LoadByAssetID(int id)
+	{
 		
 	}
 }
