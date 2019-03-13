@@ -5,6 +5,10 @@ namespace NodeEditorFramework.Standard
 	[NodeCanvasType("Graph Canvas")]
 	public class GraphCanvasType : NodeCanvas
 	{
+		public int minNodeID;
+		public int maxNodeID;
+		public int sectionID;
+
 		public override string canvasName { get { return "Graph"; } }
 
 		private string rootNodeID { get { return "rootGraphNode"; } }
@@ -38,6 +42,18 @@ namespace NodeEditorFramework.Standard
 			if (nodeID == rootNodeID)
 				return !nodes.Exists ((Node n) => n.GetID == rootNodeID);
 			return true;
+		}
+		public Node GetFirst()
+		{
+			for (int i = 0; i < nodes.Count; i++) {
+				if (nodes [i].GetLast () == null)
+					return nodes [i];
+			}
+			return rootNode;
+		}
+		public Node GetLast()
+		{
+			return null;
 		}
 	}
 }
