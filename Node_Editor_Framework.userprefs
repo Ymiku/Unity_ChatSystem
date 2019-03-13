@@ -1,0 +1,18 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\Node.cs">
+    <Files>
+      <File FileName="Assets\MyNode\ChatImageNode.cs" Line="54" Column="3" />
+      <File FileName="Assets\MyNode\ChatOptionNode.cs" Line="67" Column="13" />
+      <File FileName="Assets\MyNode\ChatNode.cs" Line="79" Column="3" />
+      <File FileName="Assets\MyNode\RootGraphNode.cs" Line="28" Column="4" />
+      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\Node.cs" Line="644" Column="4" />
+      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\ConnectionPort.cs" Line="16" Column="2" />
+      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Nodes\Example\AllAroundNode.cs" Line="6" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
