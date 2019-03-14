@@ -26,6 +26,9 @@ MonoBehaviour:
   - {fileID: 11453301}
   - {fileID: 11418187}
   groups: []
+  minNodeID: 0
+  maxNodeID: 0
+  sectionID: 0
   rootNode: {fileID: 11412686}
 --- !u!114 &11402259
 MonoBehaviour:
@@ -58,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de03bdfc59265fe45ac36abd01b51a31, type: 3}
   m_Name: Flow Node
   m_EditorClassIdentifier: 
+  name: 
   cond: 0
   condName: 
   condParam: 0
@@ -252,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4620fa9db0beb41b2d5e2bff1656c9, type: 3}
   m_Name: Graph Root Node
   m_EditorClassIdentifier: 
+  name: 
   cond: 0
   condName: 
   condParam: 0
@@ -348,6 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de03bdfc59265fe45ac36abd01b51a31, type: 3}
   m_Name: Flow Node
   m_EditorClassIdentifier: 
+  name: 
   cond: 0
   condName: 
   condParam: 0
@@ -427,6 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de03bdfc59265fe45ac36abd01b51a31, type: 3}
   m_Name: Flow Node
   m_EditorClassIdentifier: 
+  name: 
   cond: 0
   condName: 
   condParam: 0
@@ -698,6 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3dd50b389073b148b5ec10e419dc073, type: 3}
   m_Name: Input Node
   m_EditorClassIdentifier: 
+  name: 
   cond: 0
   condName: 
   condParam: 0
@@ -982,6 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de03bdfc59265fe45ac36abd01b51a31, type: 3}
   m_Name: Flow Node
   m_EditorClassIdentifier: 
+  name: 
   cond: 0
   condName: 
   condParam: 0
@@ -1335,6 +1344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f5df92d12f07d45a4fcfb96e1b36d8, type: 3}
   m_Name: Display Node
   m_EditorClassIdentifier: 
+  name: 
   cond: 0
   condName: 
   condParam: 0
@@ -1391,6 +1401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de03bdfc59265fe45ac36abd01b51a31, type: 3}
   m_Name: Flow Node
   m_EditorClassIdentifier: 
+  name: 
   cond: 0
   condName: 
   condParam: 0

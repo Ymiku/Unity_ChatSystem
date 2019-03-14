@@ -21,6 +21,9 @@ MonoBehaviour:
   - {fileID: 114208221735427984}
   - {fileID: 114995390042087942}
   groups: []
+  minNodeID: 0
+  maxNodeID: 0
+  sectionID: 0
   rootNode: {fileID: 114208221735427984}
 --- !u!114 &114021239969824966
 MonoBehaviour:

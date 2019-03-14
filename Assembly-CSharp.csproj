@@ -119,9 +119,12 @@
      <Compile Include="Assets\Node_Editor_Framework-Examples-Dialogue-System\ExampleDialogSystem\Source\MessageBox\OptionsHandler.cs" />
      <Compile Include="Assets\Node_Editor_Framework-Examples-Dialogue-System\ExampleDialogSystem\Source\Testing\TestScripts.cs" />
      <Compile Include="Assets\NodeItemProxy.cs" />
+     <Compile Include="Assets\Save Manager\XMLSaver.cs" />
      <Compile Include="Assets\Singleton.cs" />
      <Compile Include="Assets\UnitySingleton.cs" />
      <None Include="Assets\Node_Editor_Framework\Node_Editor\Resources\Shader\LineShader.shader" />
+     <None Include="Assets\save.xml" />
+     <None Include="Assets\link.xml" />
      <None Include="Assets\Node_Editor_Framework\Node_Editor\Utilities\link.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.2.5f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

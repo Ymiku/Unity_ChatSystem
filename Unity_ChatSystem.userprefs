@@ -7,12 +7,11 @@
       <File FileName="Assets\Node_Editor_Framework\Node_Editor\Default\Graph Example\GraphCanvasType.cs" Line="1" Column="1" />
       <File FileName="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\NodeCanvas.cs" Line="1" Column="1" />
       <File FileName="Assets\Node_Editor_Framework\Node_Editor\Default\Graph Example\GraphTraversal.cs" Line="1" Column="1" />
-      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\Node.cs" Line="144" Column="39" />
-      <File FileName="Assets\ChatInstance.cs" Line="38" Column="3" />
+      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\Node.cs" Line="1" Column="1" />
+      <File FileName="Assets\ChatInstance.cs" Line="1" Column="1" />
       <File FileName="Assets\ChatManager.cs" Line="57" Column="53" />
-      <File FileName="Assets\GameManager.cs" Line="16" Column="3" />
+      <File FileName="Assets\GameManager.cs" Line="1" Column="1" />
       <File FileName="Assets\UnitySingleton.cs" Line="1" Column="1" />
-      <File FileName="Assets\NodeItemProxy.cs" Line="11" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
