@@ -5,14 +5,19 @@ using NodeEditorFramework;
 using NodeEditorFramework.Standard;
 public class ChatInstance{
 	int curPairID = 0;
-	Node curRunningNode;
+	public Node curRunningNode;
 	Node curFocusNode;
 	NodeCanvas curSection;
+	long _lastChatTimeStamp;
 	public Dictionary<string,int> name2Id = new Dictionary<string, int> {
 		{ "Tom",0 },
 		{ "Jenny",0 },
 	};
-	public void OnEnter(string name,string name2)
+	public void OnInit(int pairId)
+	{
+
+	}
+	public void OnEnter()
 	{
 		
 	}
@@ -26,19 +31,15 @@ public class ChatInstance{
 	}
 	public string GetLastSentence()
 	{
-		
+		return "";
 	}
-	public void Bind()
+	public Node MoveUp()
 	{
-		
+		return null;
 	}
-	public void MoveUp()
+	public Node MoveDown()
 	{
-		
-	}
-	public void MoveDown()
-	{
-		
+		return null;
 	}
 	public Node GetNodeByID(int nodeID)
 	{

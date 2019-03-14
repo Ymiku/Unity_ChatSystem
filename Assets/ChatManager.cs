@@ -3,31 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeEditorFramework;
 using NodeEditorFramework.Standard;
-public class ChatManager {
-	public static ChatManager Instance;
+public class ChatManager : Singleton<ChatManager> {
+	//name name selectionID
 	string curName = "";
 	ChatInstance curInstance;
 	public Dictionary<string,int> name2Id = new Dictionary<string, int> {
 		{ "Tom",0 },
 		{ "Jenny",0 },
 	};
-	Dictionary<int,ChatInstance> pairId2Instance = new Dictionary<int, ChatInstance> ();
-	public void EnterInstance(int pairId)
+	Dictionary<int,ChatInstance> pairId2Instance = new Dictionary<int, ChatInstance>();
+	//
+	public Node MoveUp()
+	{
+		return curInstance.MoveUp ();
+	}
+	public Node MoveDown()
+	{
+		return curInstance.MoveDown ();
+	}
+	public void EnterChat(string name1,string name2)
 	{
 		curInstance.OnExit ();
-		curInstance = pairId2Instance [pairId];
+		curInstance = pairId2Instance [GetPairID(name1,name2)];
 		curInstance.OnEnter ();
 	}
+	public Node TryGetOptionNode()
+	{
+		if (curInstance.curRunningNode is ChatOptionNode) {
+			return curInstance.curRunningNode;
+		}
+		return null;
+	}
+	//
 	public void OnEnter(string name)
 	{
 		pairId2Instance.Clear ();
 		for (int i = 0; i < 11; i++) {
 			int id = GetPairID (curName,"");
 			ChatInstance instance = new ChatInstance ();
+			instance.OnInit (id);
 			instance.GetLastSentence ();
 			pairId2Instance.Add (id,instance);
 		}
 	}
+	//
 	public void OnExcute()
 	{
 		foreach (var item in pairId2Instance.Values) {

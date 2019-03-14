@@ -55,6 +55,7 @@
      <Compile Include="Assets\ChatLoader.cs" />
      <Compile Include="Assets\ChatManager.cs" />
      <Compile Include="Assets\ChatSimpleNode.cs" />
+     <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\MyNode\ChatImageNode.cs" />
      <Compile Include="Assets\MyNode\ChatNode.cs" />
      <Compile Include="Assets\MyNode\ChatOptionNode.cs" />
@@ -117,6 +118,9 @@
      <Compile Include="Assets\Node_Editor_Framework-Examples-Dialogue-System\ExampleDialogSystem\Source\MessageBox\OptionsButtonHandler.cs" />
      <Compile Include="Assets\Node_Editor_Framework-Examples-Dialogue-System\ExampleDialogSystem\Source\MessageBox\OptionsHandler.cs" />
      <Compile Include="Assets\Node_Editor_Framework-Examples-Dialogue-System\ExampleDialogSystem\Source\Testing\TestScripts.cs" />
+     <Compile Include="Assets\NodeItemProxy.cs" />
+     <Compile Include="Assets\Singleton.cs" />
+     <Compile Include="Assets\UnitySingleton.cs" />
      <None Include="Assets\Node_Editor_Framework\Node_Editor\Resources\Shader\LineShader.shader" />
      <None Include="Assets\Node_Editor_Framework\Node_Editor\Utilities\link.xml" />
  <Reference Include="UnityEngine.UI">
