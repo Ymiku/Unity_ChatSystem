@@ -3,24 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeEditorFramework;
 using NodeEditorFramework.Standard;
-public class ChatManager{
-	//name1 name2 section
+public class ChatManager {
 	public static ChatManager Instance;
-	int curPairID = 0;
-	Node curRunningNode;
-	Node curFocusNode;
-	NodeCanvas curCanvas;
+	string curName = "";
+	ChatInstance curInstance;
 	public Dictionary<string,int> name2Id = new Dictionary<string, int> {
 		{ "Tom",0 },
 		{ "Jenny",0 },
 	};
-	public void Enter(string name,string name2)
+	Dictionary<int,ChatInstance> pairId2Instance = new Dictionary<int, ChatInstance> ();
+	public void EnterInstance(int pairId)
 	{
-		curPairID = GetPairID (name,name2);
+		curInstance.OnExit ();
+		curInstance = pairId2Instance [pairId];
+		curInstance.OnEnter ();
 	}
-	public Node GetNodeByID(int nodeID)
+	public void OnEnter(string name)
 	{
-		return null;
+		pairId2Instance.Clear ();
+		for (int i = 0; i < 11; i++) {
+			int id = GetPairID (curName,"");
+			ChatInstance instance = new ChatInstance ();
+			instance.GetLastSentence ();
+			pairId2Instance.Add (id,instance);
+		}
+	}
+	public void OnExcute()
+	{
+		foreach (var item in pairId2Instance.Values) {
+			item.OnExecute ();
+		}
+	}
+	public void OnExit()
+	{
+		foreach (var item in pairId2Instance.Values) {
+			item.OnExit ();
+		}
+		pairId2Instance.Clear ();
 	}
 	public GraphCanvasType GetSelectionByID(int sectionID)
 	{
@@ -36,25 +55,17 @@ public class ChatManager{
 		return id2 << 8 + id;
 	}
 
-	int GetResumeSectionID()
+	int GetResumeSectionID(int pairId)
 	{
 		return 1;
 	}
-	public int GetResumeNodeID()
+	public int GetResumeNodeID(int pairId)
 	{
 		return 1;
-	}
-	void SetResumeSectionID()
-	{
-		
-	}
-	void SetResumeNodeID()
-	{
-		
 	}
 	//Load
-	void LoadByAssetID(int id)
+	public void LoadSectionByID(int pairId,int id)
 	{
-		
+
 	}
 }
