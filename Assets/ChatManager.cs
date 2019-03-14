@@ -38,14 +38,14 @@ public class ChatManager : Singleton<ChatManager> {
 		curInstance = pairId2Instance [GetPairID(name1,name2)];
 		curInstance.OnEnter ();
 	}
-	public Node TryGetOptionNode()
+	public Node TryGetOptionNode()//get every tick
 	{
 		if (curInstance.curRunningNode is ChatOptionNode) {
 			return curInstance.curRunningNode;
 		}
 		return null;
 	}
-	public void Refresh()
+	public void Refresh()//when new node enter
 	{
 		orderedInstance.Clear ();
 		foreach (var item in pairId2Instance.Values) {
