@@ -5,7 +5,7 @@ using System;
 public class GameManager : UnitySingleton<GameManager> {
 	long _timeStamp;
 	float _localTime;
-	public string curCountName = "bull";
+	public string curAccountName = "bull";
 	public long time{
 		get{ return _timeStamp+(long)_localTime;}
 	}

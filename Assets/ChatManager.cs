@@ -4,7 +4,7 @@ using UnityEngine;
 using NodeEditorFramework;
 using NodeEditorFramework.Standard;
 public class ChatManager : Singleton<ChatManager> {
-	public delegate void RefreshEventHandler();
+	public delegate void RefreshEventHandler(List<ChatInstance> chatLst);
 	public event RefreshEventHandler OnRefresh;
 	//name name selectionID
 	string curName = "";
@@ -45,28 +45,37 @@ public class ChatManager : Singleton<ChatManager> {
 		}
 		return null;
 	}
-	public List<string> Refresh()
+	public void Refresh()
 	{
-		for (int i = 0; i < pairId2Instance.Count; i++) {
-			int id = GetPairID (curName,"");
-			ChatInstance instance = new ChatInstance ();
-			instance.OnInit (id);
-			instance.GetLastSentence ();
-			pairId2Instance.Add (id,instance);
+		orderedInstance.Clear ();
+		foreach (var item in pairId2Instance.Values) {
+			if (orderedInstance.Count == 0) {
+				orderedInstance.Add (item);
+				continue;
+			}
+			long t = item.lastChatTimeStamp;
+			for (int i = 0; i < orderedInstance.Count; i++) {
+				if (t > orderedInstance [i].lastChatTimeStamp) {
+					orderedInstance.Insert (i, item);
+					continue;
+				}
+			}
+			orderedInstance.Add (item);
 		}
+		OnRefresh (orderedInstance);
 	}
 	//
 	public void OnEnter(string name)
 	{
 		pairId2Instance.Clear ();
 		for (int i = 0; i < 11; i++) {
+			string otherName = "";
 			int id = GetPairID (curName,"");
 			ChatInstance instance = new ChatInstance ();
-			instance.OnInit (id);
-			instance.GetLastSentence ();
+			instance.OnInit (name,otherName,id);
 			pairId2Instance.Add (id,instance);
 		}
-		OnRefresh ();
+		Refresh ();
 	}
 	//
 	public void OnExcute()
@@ -82,10 +91,6 @@ public class ChatManager : Singleton<ChatManager> {
 		}
 		pairId2Instance.Clear ();
 	}
-	public GraphCanvasType GetSelectionByID(int sectionID)
-	{
-		return null;
-	}
 	int GetPairID(string name,string name2)
 	{
 		int id = name2Id [name];
@@ -95,22 +100,22 @@ public class ChatManager : Singleton<ChatManager> {
 		}
 		return id2 << 8 + id;
 	}
-	//
-	long GetLastChatTimeStamp(int pairId)
-	{
-		
-	}
-	int GetResumeSectionID(int pairId)
-	{
-		return 1;
-	}
-	public int GetResumeNodeID(int pairId)
-	{
-		return 1;
-	}
-	//Load
-	public void LoadSectionByID(int pairId,int id)
-	{
 
+	int max = 20;
+	List<int> poolQueue = new List<int>();
+	Dictionary<int,GraphCanvasType> selectionPool = new Dictionary<int, GraphCanvasType> ();
+	public GraphCanvasType LoadSectionByID(int pairId,int id)
+	{
+		int aid = pairId << 8 + id;
+		int index = poolQueue.IndexOf (aid);
+		if (index == -1) {
+			GraphCanvasType c = Resources.Load<GraphCanvasType> ("Sections/" + pairId.ToString () + "/" + id.ToString ());
+			poolQueue.Add (aid);
+			selectionPool.Add (aid,c);
+			return c;
+		}
+		poolQueue.RemoveAt (index);
+		poolQueue.Add (index);
+		return selectionPool[aid];
 	}
 }
