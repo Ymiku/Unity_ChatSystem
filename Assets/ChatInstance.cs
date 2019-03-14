@@ -9,17 +9,14 @@ public class ChatInstance{
 	Node curFocusNode;
 	NodeCanvas curSection;
 	long _lastChatTimeStamp;
-	public Dictionary<string,int> name2Id = new Dictionary<string, int> {
-		{ "Tom",0 },
-		{ "Jenny",0 },
-	};
+	List<Node> _activeNodes = new List<Node> ();
 	public void OnInit(int pairId)
 	{
 
 	}
 	public void OnEnter()
 	{
-		
+		_activeNodes.Clear ();
 	}
 	public void OnExecute()
 	{
@@ -40,6 +37,14 @@ public class ChatInstance{
 	public Node MoveDown()
 	{
 		return null;
+	}
+	public void PoolUp()
+	{
+		
+	}
+	public void PoolDown()
+	{
+		
 	}
 	public Node GetNodeByID(int nodeID)
 	{

@@ -21,6 +21,14 @@ public class ChatManager : Singleton<ChatManager> {
 	{
 		return curInstance.MoveDown ();
 	}
+	public void PoolUp()
+	{
+		curInstance.PoolUp ();
+	}
+	public void PoolDown()
+	{
+		curInstance.PoolDown ();
+	}
 	public void EnterChat(string name1,string name2)
 	{
 		curInstance.OnExit ();
