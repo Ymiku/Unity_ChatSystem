@@ -4,6 +4,8 @@ using UnityEngine;
 using NodeEditorFramework;
 using NodeEditorFramework.Standard;
 public class ChatManager : Singleton<ChatManager> {
+	public delegate void RefreshEventHandler();
+	public event RefreshEventHandler OnRefresh;
 	//name name selectionID
 	string curName = "";
 	ChatInstance curInstance;
@@ -12,6 +14,7 @@ public class ChatManager : Singleton<ChatManager> {
 		{ "Jenny",0 },
 	};
 	Dictionary<int,ChatInstance> pairId2Instance = new Dictionary<int, ChatInstance>();
+	List<ChatInstance> orderedInstance = new List<ChatInstance>();
 	//
 	public Node MoveUp()
 	{
@@ -42,6 +45,16 @@ public class ChatManager : Singleton<ChatManager> {
 		}
 		return null;
 	}
+	public List<string> Refresh()
+	{
+		for (int i = 0; i < pairId2Instance.Count; i++) {
+			int id = GetPairID (curName,"");
+			ChatInstance instance = new ChatInstance ();
+			instance.OnInit (id);
+			instance.GetLastSentence ();
+			pairId2Instance.Add (id,instance);
+		}
+	}
 	//
 	public void OnEnter(string name)
 	{
@@ -53,6 +66,7 @@ public class ChatManager : Singleton<ChatManager> {
 			instance.GetLastSentence ();
 			pairId2Instance.Add (id,instance);
 		}
+		OnRefresh ();
 	}
 	//
 	public void OnExcute()
@@ -81,7 +95,11 @@ public class ChatManager : Singleton<ChatManager> {
 		}
 		return id2 << 8 + id;
 	}
-
+	//
+	long GetLastChatTimeStamp(int pairId)
+	{
+		
+	}
 	int GetResumeSectionID(int pairId)
 	{
 		return 1;
