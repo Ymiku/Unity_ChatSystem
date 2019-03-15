@@ -11,6 +11,7 @@ public class GameManager : UnitySingleton<GameManager> {
 	}
 	void OnEnterGame()
 	{
+		//load
 		_timeStamp = GetTimeStamp ();
 		_localTime = 0.0f;
 	}

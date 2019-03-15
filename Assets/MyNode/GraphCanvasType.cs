@@ -5,8 +5,6 @@ namespace NodeEditorFramework.Standard
 	[NodeCanvasType("Graph Canvas")]
 	public class GraphCanvasType : NodeCanvas
 	{
-		public int minNodeID;
-		public int maxNodeID;
 		public int sectionID;
 
 		public override string canvasName { get { return "Graph"; } }
