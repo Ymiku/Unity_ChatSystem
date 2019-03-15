@@ -1,26 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Save Manager\ChatSaveData.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ChatInstance.cs">
     <Files>
-      <File FileName="Assets\ChatLoader.cs" Line="1" Column="1" />
-      <File FileName="Assets\Node_Editor_Framework-Examples-Dialogue-System\ExampleDialogSystem\Source\Manager\DialogManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Default\Graph Example\GraphCanvasType.cs" Line="1" Column="1" />
-      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\NodeCanvas.cs" Line="1" Column="1" />
-      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Default\Graph Example\GraphTraversal.cs" Line="1" Column="1" />
-      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\Node.cs" Line="1" Column="1" />
-      <File FileName="Assets\ChatInstance.cs" Line="1" Column="1" />
-      <File FileName="Assets\ChatManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\UnitySingleton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Save Manager\XMLSaver.cs" Line="1" Column="1" />
-      <File FileName="Assets\Save Manager\SaveData.cs" Line="1" Column="1" />
-      <File FileName="Assets\Save Manager\ChatSaveData.cs" Line="1" Column="1" />
-      <File FileName="Assets\SuperScrollView\Scripts\LoopListView2.cs" Line="1" Column="1" />
-      <File FileName="Assets\SuperScrollView\Demo\Scripts\ChatMsgDataSourceMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets\SuperScrollView\Demo\Scripts\ListItem4.cs" Line="1" Column="1" />
-      <File FileName="Assets\SuperScrollView\Demo\Scripts\ChatMsgListViewDemoScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\SuperScrollView\Scripts\ItemPosMgr.cs" Line="281" Column="28" />
-      <File FileName="Assets\SuperScrollView\Demo\Scripts\ChangeItemHeightDemoScript.cs" Line="95" Column="37" />
+      <File FileName="Assets\ChatInstance.cs" Line="39" Column="48" />
+      <File FileName="Assets\Save Manager\XMLSaver.cs" Line="17" Column="2" />
+      <File FileName="Assets\Save Manager\ChatSaveData.cs" Line="15" Column="23" />
+      <File FileName="Assets\ChatManager.cs" Line="43" Column="19" />
+      <File FileName="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\Node.cs" Line="643" Column="3" />
+      <File FileName="Assets\MyNode\GraphCanvasType.cs" Line="58" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

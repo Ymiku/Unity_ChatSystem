@@ -6,8 +6,7 @@ using System.IO;
 
 public class XMLSaver : MonoBehaviour {
 	// Use this for initialization
-	SaveData s;
-	SaveData b;
+	public static SaveData saveData;
 	public void Save (SaveData data) {
 		XmlSerializer serializer = new XmlSerializer (typeof(SaveData));
 		FileStream stream = new FileStream (Application.persistentDataPath + "/save.xml", FileMode.Create);
@@ -24,7 +23,7 @@ public class XMLSaver : MonoBehaviour {
 			data = serializer.Deserialize (stream) as SaveData;
 			stream.Close ();
 		} else {
-			Debug.LogError ("Save Something First");
+			Debug.LogError ("Not Found!");
 		}
 		return data;
 	}

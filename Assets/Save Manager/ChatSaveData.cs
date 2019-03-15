@@ -14,4 +14,5 @@ public class ChatInstanceData
 	public int curSectionId;
 	public int curNodeId;
 	public long lastChatTimeStamp;
+	public float totalRectHeight;
 }

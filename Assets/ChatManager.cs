@@ -102,20 +102,39 @@ public class ChatManager : Singleton<ChatManager> {
 	}
 
 	int max = 20;
-	List<int> poolQueue = new List<int>();
+	List<int> poolList = new List<int>();
 	Dictionary<int,GraphCanvasType> selectionPool = new Dictionary<int, GraphCanvasType> ();
 	public GraphCanvasType LoadSectionByID(int pairId,int id)
 	{
 		int aid = pairId << 8 + id;
-		int index = poolQueue.IndexOf (aid);
+		int index = poolList.IndexOf (aid);
 		if (index == -1) {
 			GraphCanvasType c = Resources.Load<GraphCanvasType> ("Sections/" + pairId.ToString () + "/" + id.ToString ());
-			poolQueue.Add (aid);
+			poolList.Add (aid);
 			selectionPool.Add (aid,c);
 			return c;
 		}
-		poolQueue.RemoveAt (index);
-		poolQueue.Add (index);
+		poolList.RemoveAt (index);
+		poolList.Add (index);
 		return selectionPool[aid];
+	}
+	void CleanPool(int maxCount)
+	{
+		if (poolList.Count <= maxCount)
+			return;
+		int need2CleanNum = poolList.Count - maxCount;
+		for (int i = 0; i < need2CleanNum; i++) {
+			bool isUsing = false;
+			foreach (var item in pairId2Instance.Values) {
+				if (item.CheckIfUsing (poolList [0])) {
+					isUsing = true;
+					break;
+				}
+			}
+			if (!isUsing) {
+				selectionPool.Remove (poolList[0]);
+				poolList.RemoveAt (0);
+			}
+		}
 	}
 }

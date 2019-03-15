@@ -15,6 +15,7 @@ namespace NodeEditorFramework
 			WaitMinutes,
 			ControlByVar,
 		}
+		public int sectionId;
 		[FormerlySerializedAs("Name")]
 		public string name;
 		[FormerlySerializedAs("Comd")]
