@@ -18,11 +18,11 @@ public class ChatManager : Singleton<ChatManager> {
 	//
 	public Node MoveUp()
 	{
-		return curInstance.ShowFront ();
+		return curInstance.GetFront ();
 	}
 	public Node MoveDown()
 	{
-		return curInstance.ShowNext ();
+		return curInstance.GetNext ();
 	}
 	public void PoolUp()
 	{

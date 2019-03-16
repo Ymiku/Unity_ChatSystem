@@ -51,7 +51,7 @@ public class ChatInstance{
 	{
 		return "";
 	}
-	public Node ShowFront()
+	public Node GetFront()
 	{
 		Node node = null;
 		node = _activeNodes [0].GetFront ();
@@ -59,7 +59,7 @@ public class ChatInstance{
 		_activeNodes.Insert (0,node);
 		return node;
 	}
-	public Node ShowNext()
+	public Node GetNext()
 	{
 		Node node = null;
 		node = _activeNodes [_activeNodes.Count - 1].GetNext ();
@@ -76,7 +76,7 @@ public class ChatInstance{
 		if (_activeNodes.Count != 0)
 			_activeNodes.RemoveAt (_activeNodes.Count-1);
 	}
-	Node GetLast(Node curNode)
+	Node GetFront(Node curNode)
 	{
 		Node node = null;
 		node = curNode.GetFront ();

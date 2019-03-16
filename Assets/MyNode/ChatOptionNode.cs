@@ -7,6 +7,7 @@ namespace NodeEditorFramework.Standard
 	[Node(false, "Chat/Option Node")]
 	public class ChatOptionNode : Node
 	{
+		public string tip;
 		public const string ID = "ChatOptionNode";
 		public override string GetID { get { return ID; } }
 
@@ -33,6 +34,10 @@ namespace NodeEditorFramework.Standard
 			// Display text field and add button
 			GUILayout.BeginHorizontal();
 			inputKnob.DisplayLayout ();
+			if (cond == Cond.ControlByVar) {
+				GUILayout.Label ("提示");
+				tip = EditorGUILayout.TextField (tip);
+			}
 			if (GUILayout.Button("Add", GUILayout.ExpandWidth(false)))
 			{
 				labels.Add("聊天选项");

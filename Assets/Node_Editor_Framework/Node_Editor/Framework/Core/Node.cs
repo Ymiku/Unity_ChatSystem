@@ -15,6 +15,8 @@ namespace NodeEditorFramework
 			WaitMinutes,
 			ControlByVar,
 		}
+
+		//use at runtime
 		[NonSerialized]
 		public int nodeId;
 		public int sectionId;
@@ -26,6 +28,8 @@ namespace NodeEditorFramework
 		public string condName;
 		[FormerlySerializedAs("CondParam")]
 		public int condParam;
+		//
+
 		public Vector2 position;
 		private Vector2 autoSize;
 		public Vector2 size { get { return AutoLayout? autoSize : DefaultSize; } }
