@@ -29,6 +29,7 @@ public class ChatInstance{
 	public void OnEnter()
 	{
 		_activeNodes.Clear ();
+		//set panel
 	}
 	public void OnExecute()
 	{
@@ -50,15 +51,15 @@ public class ChatInstance{
 	{
 		return "";
 	}
-	public Node MoveUp()
+	public Node ShowFront()
 	{
 		Node node = null;
-		node = _activeNodes [0].GetLast ();
+		node = _activeNodes [0].GetFront ();
 
 		_activeNodes.Insert (0,node);
 		return node;
 	}
-	public Node MoveDown()
+	public Node ShowNext()
 	{
 		Node node = null;
 		node = _activeNodes [_activeNodes.Count - 1].GetNext ();
@@ -78,7 +79,7 @@ public class ChatInstance{
 	Node GetLast(Node curNode)
 	{
 		Node node = null;
-		node = curNode.GetLast ();
+		node = curNode.GetFront ();
 		if (node != null)
 			return node;
 		if (curNode.sectionId == 0)

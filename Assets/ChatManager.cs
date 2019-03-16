@@ -18,11 +18,11 @@ public class ChatManager : Singleton<ChatManager> {
 	//
 	public Node MoveUp()
 	{
-		return curInstance.MoveUp ();
+		return curInstance.ShowFront ();
 	}
 	public Node MoveDown()
 	{
-		return curInstance.MoveDown ();
+		return curInstance.ShowNext ();
 	}
 	public void PoolUp()
 	{
@@ -110,6 +110,9 @@ public class ChatManager : Singleton<ChatManager> {
 		int index = poolList.IndexOf (aid);
 		if (index == -1) {
 			GraphCanvasType c = Resources.Load<GraphCanvasType> ("Sections/" + pairId.ToString () + "/" + id.ToString ());
+			for (int i = 0; i < c.nodes.Count; i++) {
+				c.nodes [i].nodeId = i;
+			}
 			poolList.Add (aid);
 			selectionPool.Add (aid,c);
 			return c;

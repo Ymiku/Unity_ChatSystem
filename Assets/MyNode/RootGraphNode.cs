@@ -22,7 +22,7 @@ namespace NodeEditorFramework.Standard
 			foreach (ConnectionKnob knob in connectionKnobs) 
 				knob.DisplayLayout ();
 		}
-		public override Node GetLast ()
+		public override Node GetFront ()
 		{
 			return null;
 		}

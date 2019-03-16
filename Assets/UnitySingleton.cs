@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class UnitySingleton<T> : MonoBehaviour 
@@ -25,6 +25,7 @@ public class UnitySingleton<T> : MonoBehaviour
 	}
 	public virtual void SingletonInit()
 	{
+
 	}
 	// Use this for initialization
 	public virtual void Awake()

@@ -15,6 +15,8 @@ namespace NodeEditorFramework
 			WaitMinutes,
 			ControlByVar,
 		}
+		[NonSerialized]
+		public int nodeId;
 		public int sectionId;
 		[FormerlySerializedAs("Name")]
 		public string name;
@@ -640,7 +642,7 @@ namespace NodeEditorFramework
 				connectionPorts[i].ClearConnections (true);
 			}
 		}
-		public virtual Node GetLast (){
+		public virtual Node GetFront (){
 			return null;
 		}
 		public virtual Node GetNext (){

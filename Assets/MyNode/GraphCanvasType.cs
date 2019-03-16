@@ -44,7 +44,7 @@ namespace NodeEditorFramework.Standard
 		public Node GetFirst()
 		{
 			for (int i = 0; i < nodes.Count; i++) {
-				if (nodes [i].GetLast () == null)
+				if (nodes [i].GetFront () == null)
 					return nodes [i];
 			}
 			return rootNode;

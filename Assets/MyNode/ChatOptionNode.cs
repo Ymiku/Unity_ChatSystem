@@ -54,7 +54,7 @@ namespace NodeEditorFramework.Standard
 				GUILayout.EndHorizontal();
 			}
 		}
-		public override Node GetLast ()
+		public override Node GetFront ()
 		{
 			return inputKnob.connections [0].body;
 		}

@@ -69,7 +69,7 @@ public class ChatNode : Node
 		public override string Identifier { get { return "ChatBase"; } }
 		public override Color Color { get { return Color.red; } }
 	}
-	public override Node GetLast ()
+	public override Node GetFront ()
 	{
 		return inputKnob.connections [0].body;
 	}
