@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Xml;
 using System.IO;
 
-public class XMLSaver : MonoBehaviour {
+public class XMLSaver : Singleton<XMLSaver> {
 	// Use this for initialization
 	public static SaveData saveData;
 	public void Save (SaveData data) {
