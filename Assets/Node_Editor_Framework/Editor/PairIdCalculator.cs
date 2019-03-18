@@ -19,9 +19,10 @@ public class PairIdCalculator : EditorWindow {
 		id2 = EditorGUILayout.IntField (id2);
 		int i;
 		if (id1 < id2) {
-			i = id1 << 8 + id2;
+			i = (id1 << 8) + id2;
+		} else {
+			i = (id2 << 8) + id1;
 		}
-		i = id2 << 8 + id1;
 		GUILayout.Label (i.ToString());
 	}
 }

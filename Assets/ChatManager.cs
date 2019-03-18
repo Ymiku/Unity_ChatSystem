@@ -13,6 +13,7 @@ public class ChatManager : Singleton<ChatManager> {
 		{ "Tom",0 },
 		{ "Jenny",1 },
 	};
+	public Dictionary<string,int> id2Name = new Dictionary<string, int>();
 	Dictionary<int,ChatInstance> pairId2Instance = new Dictionary<int, ChatInstance>();
 	List<ChatInstance> orderedInstance = new List<ChatInstance>();
 	//
@@ -67,10 +68,15 @@ public class ChatManager : Singleton<ChatManager> {
 	//
 	public void OnEnter(string name)
 	{
+		id2Name.Clear ();
+		foreach (var item in name2Id.Keys) {
+			id2Name.Add (name2Id[item],item);
+		}
 		pairId2Instance.Clear ();
-		for (int i = 0; i < 11; i++) {
-			string otherName = "";
-			int id = GetPairID (curName,"");
+		List<string> friends = XMLSaver.saveData.GetFriendsLst ();
+		for (int i = 0; i < friends.Count; i++) {
+			string otherName = friends[i];
+			int id = GetPairID (curName,friends[i]);
 			ChatInstance instance = new ChatInstance ();
 			instance.OnInit (name,otherName,id);
 			pairId2Instance.Add (id,instance);
@@ -96,9 +102,9 @@ public class ChatManager : Singleton<ChatManager> {
 		int id = name2Id [name];
 		int id2 = name2Id [name2];
 		if (id < id2) {
-			return id << 8 + id2;
+			return (id << 8) + id2;
 		}
-		return id2 << 8 + id;
+		return (id2 << 8) + id;
 	}
 
 	int max = 20;
@@ -106,12 +112,14 @@ public class ChatManager : Singleton<ChatManager> {
 	Dictionary<int,GraphCanvasType> selectionPool = new Dictionary<int, GraphCanvasType> ();
 	public GraphCanvasType LoadSectionByID(int pairId,int id)
 	{
-		int aid = pairId << 8 + id;
+		int aid = (pairId << 8) + id;
 		int index = poolList.IndexOf (aid);
 		if (index == -1) {
 			GraphCanvasType c = Resources.Load<GraphCanvasType> ("Sections/" + pairId.ToString () + "/" + id.ToString ());
+			c.sectionID = id;
 			for (int i = 0; i < c.nodes.Count; i++) {
 				c.nodes [i].nodeId = i;
+				c.nodes [i].sectionId = id;
 			}
 			poolList.Add (aid);
 			selectionPool.Add (aid,c);

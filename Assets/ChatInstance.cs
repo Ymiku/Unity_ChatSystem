@@ -37,6 +37,7 @@ public class ChatInstance{
 	{
 		bool hasFinished = curRunningNode.Execute();
 		if (hasFinished) {
+			lastSentence = GetLastSentence (curRunningNode);
 			curRunningNode = curRunningNode.GetNext ();
 			curSection = ChatManager.Instance.LoadSectionByID (curPairID,curRunningNode.sectionId);
 			saveData.curNodeId = curRunningNode.nodeId;
