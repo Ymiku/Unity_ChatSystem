@@ -9,6 +9,9 @@ public class GameManager : UnitySingleton<GameManager> {
 	public long time{
 		get{ return _timeStamp+(long)_localTime;}
 	}
+	public int localTime{
+		get{ return (int)_localTime;}
+	}
 	void OnEnterGame()
 	{
 		//load
@@ -29,4 +32,5 @@ public class GameManager : UnitySingleton<GameManager> {
 		TimeSpan ts = DateTime.UtcNow - new DateTime(2018, 1, 1, 0, 0, 0, 0); 
 		return Convert.ToInt64 (ts.TotalSeconds);
 	} 
+
 }

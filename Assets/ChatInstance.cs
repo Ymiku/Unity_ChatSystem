@@ -24,6 +24,9 @@ public class ChatInstance{
 		lastChatTimeStamp = saveData.lastChatTimeStamp;
 		curSection = ChatManager.Instance.LoadSectionByID(curPairID,saveData.curSectionId);
 		curRunningNode = curSection.nodes [saveData.curNodeId];
+		Node front = curRunningNode.GetFront ();
+		if (front != null)
+			lastSentence = GetLastSentence (front);
 		totalRectHeight = saveData.totalRectHeight;
 	}
 	public void OnEnter()
@@ -33,22 +36,20 @@ public class ChatInstance{
 	}
 	public void OnExecute()
 	{
-		if (curRunningNode is ChatNode) {
-		
-		} else if (curRunningNode is ChatOptionNode) {
-		
-		} else if (curRunningNode is ChatImageNode) {
-		
-		}
-		if (false)
+		bool hasFinished = curRunningNode.Execute();
+		if (hasFinished) {
+			curRunningNode = curRunningNode.GetNext ();
 			ChatManager.Instance.Refresh ();
+		}
 	}
 	public void OnExit()
 	{
 		_activeNodes.Clear ();
 	}
-	public string GetLastSentence()
+	public string GetLastSentence(Node node)
 	{
+		if (node is ChatImageNode)
+			return "[图片]";
 		return "";
 	}
 	public Node GetFront()

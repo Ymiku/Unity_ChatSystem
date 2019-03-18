@@ -28,6 +28,39 @@ namespace NodeEditorFramework
 		public string condName;
 		[FormerlySerializedAs("CondParam")]
 		public int condParam;
+		[NonSerialized]
+		int startTime = -1;
+		public bool Execute()
+		{
+			switch (cond) {
+			case Cond.Instance:
+				return true;
+			case Cond.WaitSeconds:
+				if (startTime == -1) {
+					startTime = GameManager.Instance.localTime;
+				}
+				if (GameManager.Instance.localTime - startTime >= condParam) {
+					startTime = -1;
+					return true;
+				}
+				break;
+			case Cond.WaitMinutes:
+				if (startTime == -1) {
+					startTime = GameManager.Instance.localTime;
+				}
+				if (GameManager.Instance.localTime - startTime >= condParam*60) {
+					startTime = -1;
+					return true;
+				}
+				break;
+			case Cond.ControlByVar:
+				return SaveData.Instance.Check (condName,condParam);
+				break;
+			default:
+				break;
+			}
+			return false;
+		}
 		//
 
 		public Vector2 position;

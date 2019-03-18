@@ -11,7 +11,7 @@ public class ChatManager : Singleton<ChatManager> {
 	ChatInstance curInstance;
 	public Dictionary<string,int> name2Id = new Dictionary<string, int> {
 		{ "Tom",0 },
-		{ "Jenny",0 },
+		{ "Jenny",1 },
 	};
 	Dictionary<int,ChatInstance> pairId2Instance = new Dictionary<int, ChatInstance>();
 	List<ChatInstance> orderedInstance = new List<ChatInstance>();
