@@ -35,13 +35,9 @@ public class NodeItemProxy : MonoBehaviour {
 		}
 	}
 	public Node linkedNode;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public float SetData(Node node)
+	{
+		linkedNode = node;
+		return 20.0f;
 	}
 }

@@ -7,21 +7,46 @@ public class ChatManager : Singleton<ChatManager> {
 	public delegate void RefreshEventHandler(List<ChatInstance> chatLst);
 	public event RefreshEventHandler OnRefresh;
 	//name name selectionID
-	string curName = "";
-	ChatInstance curInstance;
+	public string curName = "Tom";
+	public ChatInstance curInstance;
 	public Dictionary<string,int> name2Id = new Dictionary<string, int> {
 		{ "Tom",0 },
-		{ "Jenny",1 },
+		{ "Jerry",1 },
 	};
-	public Dictionary<string,int> id2Name = new Dictionary<string, int>();
+	public Dictionary<int,string> id2Name = new Dictionary<int,string>();
 	Dictionary<int,ChatInstance> pairId2Instance = new Dictionary<int, ChatInstance>();
 	List<ChatInstance> orderedInstance = new List<ChatInstance>();
 	//
-	public Node MoveUp()
+	public void AddFriend(string name)
+	{
+		pairId2Instance.Add (GetPairID(curName,name),new ChatInstance());
+		XMLSaver.saveData.instanceID.Add (GetPairID(curName,name));
+		ChatInstanceData data = new ChatInstanceData ();
+		data.curNodeId = 0;
+		data.curSectionId = 0;
+		data.lastChatTimeStamp = GameManager.Instance.time;
+		XMLSaver.saveData.instanceData.Add (data);
+		OnExit ();
+		OnEnter (curName);
+	}
+	public void DeleteFriend(string name)
+	{
+		pairId2Instance.Remove (GetPairID(curName,name));
+		int i = XMLSaver.saveData.instanceID.IndexOf (GetPairID(curName,name));
+		XMLSaver.saveData.instanceID.RemoveAt (i);
+		XMLSaver.saveData.instanceData.RemoveAt (i);
+		OnExit ();
+		OnEnter (curName);
+	}
+	public Node GetLastRunningNode()
+	{
+		return curInstance.GetLastRunningNode ();
+	}
+	public Node GetFront()
 	{
 		return curInstance.GetFront ();
 	}
-	public Node MoveDown()
+	public Node GetNext()
 	{
 		return curInstance.GetNext ();
 	}
@@ -73,7 +98,7 @@ public class ChatManager : Singleton<ChatManager> {
 			id2Name.Add (name2Id[item],item);
 		}
 		pairId2Instance.Clear ();
-		List<string> friends = XMLSaver.saveData.GetFriendsLst ();
+		List<string> friends = XMLSaver.saveData.GetFriendsLst (name);
 		for (int i = 0; i < friends.Count; i++) {
 			string otherName = friends[i];
 			int id = GetPairID (curName,friends[i]);

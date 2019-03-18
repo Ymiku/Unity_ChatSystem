@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using NodeEditorFramework;
+using NodeEditorFramework.Standard;
+
 public partial class SaveData
 {
 	public List<int> instanceID = new List<int> ();
@@ -15,7 +18,7 @@ public partial class SaveData
 		List<string> result = new List<string> ();
 		for (int i = 0; i < instanceID.Count; i++) {
 			int m = (instanceID [i] >> 8);
-			int n = (instanceID [i] & Convert.ToInt32("0000000011111111"),2);
+			int n = (instanceID [i] & 255);
 			if(m!=playerId&&n!=playerId)
 				continue;
 			if(m==playerId)
@@ -23,6 +26,7 @@ public partial class SaveData
 			else
 				result.Add(ChatManager.Instance.id2Name[m]);
 		}
+		return result;
 	}
 	public ChatInstanceData GetInstanceData(int pairId)
 	{
@@ -51,13 +55,12 @@ public class ChatInstanceData
 	public int curSectionId;
 	public int curNodeId;
 	public long lastChatTimeStamp;
-	public float totalRectHeight;
+	public float totalRectHeight = 0.0f;
 	public List<int> nodeIds = new List<int>();
 	public List<int> nodeOptions = new List<int>();
 	//section<<8+id
-	public int GetOption(int id)
+	public int GetOption(Node node)
 	{
-		int i = nodeIds.IndexOf (id);
-		return nodeOptions [i];
+		return nodeOptions [(node.sectionId<<8)+nodeIds.IndexOf (node.nodeId)];
 	}
 }

@@ -30,6 +30,7 @@ namespace NodeEditorFramework
 		public int condParam;
 		[NonSerialized]
 		int startTime = -1;
+		public virtual string GetLastSentence(ChatInstanceData data = null){return "";}
 		public bool Execute()
 		{
 			switch (cond) {

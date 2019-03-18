@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using NodeEditorFramework;
+using NodeEditorFramework.Standard;
+
 public class PoolableScrollView : MonoBehaviour {
 	public NodeItemProxy[] prefabs;
 	Stack<NodeItemProxy>[] _pools;
@@ -14,6 +17,7 @@ public class PoolableScrollView : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
+		ChatManager.Instance.AddFriend ("Jerry");
 		Init ();
 	}
 	void Init () {
@@ -25,15 +29,29 @@ public class PoolableScrollView : MonoBehaviour {
 			_pools [i] = new Stack<NodeItemProxy> ();
 		}
 	}
-	
+	void TryOpen()
+	{
+		Node front = ChatManager.Instance.curInstance.curRunningNode.GetFront ();
+		if (front == null)
+			return;
+		NodeItemProxy item = GetItem (front.name==ChatManager.Instance.curName?1:0);
+		float height = ChatManager.Instance.curInstance.saveData.totalRectHeight;
+		float itemHeight = item.SetData (front);
+		ChatManager.Instance.curInstance.saveData.totalRectHeight += itemHeight;
+		contextTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,height+itemHeight);
+		item.cachedRectTransform.anchoredPosition = new Vector2 (0.0f,itemHeight-contextTrans.sizeDelta.y);
+		_activeItems.Add (item);
+	}
 	// Update is called once per frame
 	void Update () {
 		while (CheckBorder()) {}
 	}
 	bool CheckBorder()
 	{
-		if (_activeItems.Count == 0)
+		if (_activeItems.Count == 0) {
+			TryOpen ();
 			return false;
+		}
 		if (NeedCull (_activeItems [0])) {
 			PoolUp (_activeItems [0]);
 			return true;
@@ -42,31 +60,56 @@ public class PoolableScrollView : MonoBehaviour {
 			PoolDown (_activeItems [_activeItems.Count-1]);
 			return true;
 		}
+		if (_activeItems [0].pos.y + contextTrans.anchoredPosition.y < 0 && TryAddUp ())
+			return true;
+		if (_activeItems [_activeItems.Count - 1].pos.y + _activeItems [_activeItems.Count - 1].height + contextTrans.anchoredPosition.y > -viewPortTrans.sizeDelta.y && TryAddDown ())
+			return true;
 		return false;
 	}
 	bool TryAddDown()
 	{
-		return false;
+		Node down = _activeItems[_activeItems.Count-1].linkedNode.GetNext();
+		if (down == null)
+			return false;
+		float height = ChatManager.Instance.curInstance.saveData.totalRectHeight;
+		NodeItemProxy item = GetItem (down.name==ChatManager.Instance.curName?1:0);
+		float itemHeight = item.SetData (down);
+		float itemY = _activeItems [_activeItems.Count - 1].cachedRectTransform.anchoredPosition.y - _activeItems [_activeItems.Count - 1].height;
+		if (itemY - itemHeight * 0.5f <= -ChatManager.Instance.curInstance.saveData.totalRectHeight) {
+			ChatManager.Instance.curInstance.saveData.totalRectHeight += itemHeight;
+			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, height + itemHeight);
+		}
+		item.cachedRectTransform.anchoredPosition = new Vector2 (0.0f,itemY);
+		_activeItems.Add (item);
+		return true;
 	}
 	bool TryAddUp ()
 	{
-		return false;
+		Node up = _activeItems[0].linkedNode.GetFront();
+		if (up == null)
+			return false;
+		NodeItemProxy item = GetItem (up.name==ChatManager.Instance.curName?1:0);
+		float itemHeight = item.SetData (up);
+		float itemY = _activeItems [0].cachedRectTransform.anchoredPosition.y + itemHeight;
+		item.cachedRectTransform.anchoredPosition = new Vector2 (0.0f,itemY);
+		_activeItems.Insert (0,item);
+		return true;
 	}
 	void PoolUp(NodeItemProxy node)
 	{
 		Pool (node);
-		float nodeHeight = node.height;
-		//contextTrans.sizeDelta = new Vector2 (contextTrans.sizeDelta.x,contextTrans.sizeDelta.y-nodeHeight);
-
-		for (int i = 0; i < _activeItems.Count; i++) {
-			//_activeItems [i].cachedRectTransform.anchoredPosition = new Vector2 (_activeItems [i].cachedRectTransform.anchoredPosition.x,_activeItems [i].cachedRectTransform.anchoredPosition.y+nodeHeight);
-		}
-		//contextTrans.anchoredPosition = new Vector2 (contextTrans.anchoredPosition.x,contextTrans.anchoredPosition.y-nodeHeight);
 	}
 	void PoolDown(NodeItemProxy node)
 	{
 		Pool (node);
 		contextTrans.sizeDelta = new Vector2 (contextTrans.sizeDelta.x,contextTrans.sizeDelta.y-node.height);
+	}
+	NodeItemProxy GetItem(int index)
+	{
+		if (_pools [index].Count > 0)
+			return _pools [index].Pop ();
+		else
+			return GameObject.Instantiate (prefabs[index]);
 	}
 	void Pool(NodeItemProxy node)
 	{

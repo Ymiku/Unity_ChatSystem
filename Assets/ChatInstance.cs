@@ -8,12 +8,13 @@ public class ChatInstance{
 	public Node curRunningNode;
 	GraphCanvasType curSection;
 	public long lastChatTimeStamp;
-	float totalRectHeight;
+	float totalRectHeight = 0.0f;
 	List<Node> _activeNodes = new List<Node> ();
 	string userName;
 	string otherUserName;
-	public string lastSentence;
-	ChatInstanceData saveData;
+	public string lastSentence = "";
+	public ChatInstanceData saveData;
+
 	public void OnInit(string name,string otherName,int pairId)
 	{
 		userName = name;
@@ -49,11 +50,15 @@ public class ChatInstance{
 	{
 		_activeNodes.Clear ();
 	}
+	public Node GetLastRunningNode()
+	{
+		return curRunningNode.GetFront ();
+	}
 	public string GetLastSentence(Node node)
 	{
-		if (node is ChatImageNode)
-			return "[图片]";
-		return "";
+		if (node == null)
+			return "";
+		return node.GetLastSentence(saveData);
 	}
 	public Node GetFront()
 	{
