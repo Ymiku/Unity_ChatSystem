@@ -54,7 +54,7 @@ namespace NodeEditorFramework
 				}
 				break;
 			case Cond.ControlByVar:
-				return SaveData.Instance.Check (condName,condParam);
+				return XMLSaver.saveData.Check (condName,condParam);
 				break;
 			default:
 				break;

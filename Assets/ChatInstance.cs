@@ -19,8 +19,7 @@ public class ChatInstance{
 		userName = name;
 		otherUserName = otherName;
 		curPairID = pairId;
-		int id = XMLSaver.saveData.instanceID.IndexOf (curPairID);
-		saveData = XMLSaver.saveData.instanceData[id];
+		saveData = XMLSaver.saveData.GetInstanceData (curPairID);
 		lastChatTimeStamp = saveData.lastChatTimeStamp;
 		curSection = ChatManager.Instance.LoadSectionByID(curPairID,saveData.curSectionId);
 		curRunningNode = curSection.nodes [saveData.curNodeId];
@@ -39,6 +38,9 @@ public class ChatInstance{
 		bool hasFinished = curRunningNode.Execute();
 		if (hasFinished) {
 			curRunningNode = curRunningNode.GetNext ();
+			curSection = ChatManager.Instance.LoadSectionByID (curPairID,curRunningNode.sectionId);
+			saveData.curNodeId = curRunningNode.nodeId;
+			saveData.curSectionId = curSection.sectionID;
 			ChatManager.Instance.Refresh ();
 		}
 	}

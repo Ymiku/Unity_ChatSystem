@@ -4,11 +4,21 @@ using UnityEngine;
 
 public partial class SaveData
 {
-	public static SaveData Instance;
 	public List<int> instanceID = new List<int> ();
 	public List<ChatInstanceData> instanceData = new List<ChatInstanceData> ();
+
 	public List<string> varName = new List<string> ();
 	public List<int> varValue = new List<int> ();
+	public ChatInstanceData GetInstanceData(int pairId)
+	{
+		int i = instanceID.IndexOf (pairId);
+		if (i == -1) {
+			instanceID.Add (pairId);
+			instanceData.Add (new ChatInstanceData());
+			i = instanceData.Count - 1;
+		}
+		return instanceData[i];
+	}
 	public bool Check(string varname,int varvalue)
 	{
 		int index = varName.IndexOf(varname);
