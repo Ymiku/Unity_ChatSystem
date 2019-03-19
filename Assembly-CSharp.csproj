@@ -58,6 +58,7 @@
      <Compile Include="Assets\ChatNode\ChatOptionNode.cs" />
      <Compile Include="Assets\ChatNode\GraphCanvasType.cs" />
      <Compile Include="Assets\ChatNode\RootGraphNode.cs" />
+     <Compile Include="Assets\ChatNode\SetParamNode.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\Node_Editor_Framework\Node_Editor\Default\Calculation Base\CalculationCanvasType.cs" />
      <Compile Include="Assets\Node_Editor_Framework\Node_Editor\Default\Calculation Base\CanvasCalculator.cs" />

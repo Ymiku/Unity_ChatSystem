@@ -47,15 +47,17 @@ public class PoolableScrollView : MonoBehaviour {
 		NodeItemProxy item = GetItem (front.name==ChatManager.Instance.curName?1:0);
 		float height = ChatManager.Instance.curInstance.saveData.totalRectHeight;
 		float itemHeight = item.SetData (front);
-		ChatManager.Instance.curInstance.saveData.totalRectHeight += itemHeight;
-		contextTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,height+itemHeight);
 		item.cachedRectTransform.anchoredPosition = new Vector2 (0.0f,itemHeight-contextTrans.sizeDelta.y);
+		if (!front.hasCalHeight) {
+			front.hasCalHeight = true;
+			ChatManager.Instance.curInstance.saveData.totalRectHeight += itemHeight;
+			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, height + itemHeight);
+			item.cachedRectTransform.anchoredPosition = new Vector2 (0.0f, itemHeight - contextTrans.sizeDelta.y);
+		}
 		_activeItems.Add (item);
 	}
 	// Update is called once per frame
 	void Update () {
-		//bool b= CheckBorder ();
-		//Debug.Log (b);
 		while (CheckBorder()) {}
 	}
 	bool CheckBorder()
@@ -82,15 +84,19 @@ public class PoolableScrollView : MonoBehaviour {
 	{
 		Node linkedNode = _activeItems [_activeItems.Count - 1].linkedNode;
 		Node down = linkedNode.GetNext();
-		if (ChatManager.Instance.curInstance.curRunningNode == down)
-			return false;
+		while (down!=null && down is SetParamNode) {
+			down = down.GetNext();
+		}
 		if (down == null)
+			return false;
+		if (ChatManager.Instance.curInstance.curRunningNode == down)
 			return false;
 		float height = ChatManager.Instance.curInstance.saveData.totalRectHeight;
 		NodeItemProxy item = GetItem (down.name==ChatManager.Instance.curName?1:0);
 		float itemHeight = item.SetData (down);
 		float itemY = _activeItems [_activeItems.Count - 1].cachedRectTransform.anchoredPosition.y - _activeItems [_activeItems.Count - 1].height;
-		if (itemY - itemHeight * 0.5f <= -ChatManager.Instance.curInstance.saveData.totalRectHeight) {
+		if (!down.hasCalHeight) {
+			down.hasCalHeight = true;
 			ChatManager.Instance.curInstance.saveData.totalRectHeight += itemHeight;
 			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, height + itemHeight);
 		}
@@ -101,6 +107,9 @@ public class PoolableScrollView : MonoBehaviour {
 	bool TryAddUp ()
 	{
 		Node up = _activeItems[0].linkedNode.GetFront();
+		while (up!=null && up is SetParamNode) {
+			up = up.GetFront ();
+		}
 		if (up == null)
 			return false;
 		NodeItemProxy item = GetItem (up.name==ChatManager.Instance.curName?1:0);
@@ -108,6 +117,16 @@ public class PoolableScrollView : MonoBehaviour {
 		float itemY = _activeItems [0].cachedRectTransform.anchoredPosition.y + itemHeight;
 		item.cachedRectTransform.anchoredPosition = new Vector2 (0.0f,itemY);
 		_activeItems.Insert (0,item);
+		if (!up.hasCalHeight) {
+			up.hasCalHeight = true;
+			ChatManager.Instance.curInstance.saveData.totalRectHeight += itemHeight;
+			float height = ChatManager.Instance.curInstance.saveData.totalRectHeight;
+			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, height + itemHeight);
+			for (int i = 0; i < _activeItems.Count; i++) {
+				_activeItems [i].cachedRectTransform.anchoredPosition += new Vector2 (0.0f,itemHeight);
+			}
+			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, height + itemHeight);
+		}
 		return true;
 	}
 	void PoolUp(NodeItemProxy node)

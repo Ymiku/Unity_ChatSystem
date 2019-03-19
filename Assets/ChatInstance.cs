@@ -36,15 +36,19 @@ public class ChatInstance{
 	}
 	public void OnExecute()
 	{
-		bool hasFinished = curRunningNode.Execute();
-		if (hasFinished) {
-			lastSentence = GetLastSentence (curRunningNode);
-			curRunningNode = curRunningNode.GetNext ();
-			curSection = ChatManager.Instance.LoadSectionByID (curPairID,curRunningNode.sectionId);
-			saveData.curNodeId = curRunningNode.nodeId;
-			saveData.curSectionId = curSection.sectionID;
-			ChatManager.Instance.Refresh ();
+		bool hasFinished = true;
+		while (hasFinished) {
+			hasFinished = false;
+			hasFinished = curRunningNode.Execute();
+			if (hasFinished) {
+				lastSentence = GetLastSentence (curRunningNode);
+				curRunningNode = curRunningNode.GetNext ();
+			}
 		}
+		curSection = ChatManager.Instance.LoadSectionByID (curPairID,curRunningNode.sectionId);
+		saveData.curNodeId = curRunningNode.nodeId;
+		saveData.curSectionId = curSection.sectionID;
+		ChatManager.Instance.Refresh ();
 	}
 	public void OnExit()
 	{
@@ -58,6 +62,8 @@ public class ChatInstance{
 	{
 		if (node == null)
 			return "";
+		if (node is SetParamNode)
+			return GetLastSentence (node.GetFront());
 		return node.GetLastSentence(saveData);
 	}
 	public Node GetFront()

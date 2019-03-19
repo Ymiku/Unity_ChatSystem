@@ -17,6 +17,7 @@ namespace NodeEditorFramework
 		}
 
 		//use at runtime
+		public bool hasCalHeight = false;
 		[NonSerialized]
 		public int nodeId;
 		public int sectionId;
@@ -31,7 +32,7 @@ namespace NodeEditorFramework
 		[NonSerialized]
 		int startTime = -1;
 		public virtual string GetLastSentence(ChatInstanceData data = null){return "";}
-		public bool Execute()
+		public virtual bool Execute()
 		{
 			switch (cond) {
 			case Cond.Instance:

@@ -12,6 +12,21 @@ public partial class SaveData
 
 	public List<string> varName = new List<string> ();
 	public List<int> varValue = new List<int> ();
+	public int GetValue(string valueName)
+	{
+		int i = varName.IndexOf (valueName);
+		if (i != -1)
+			return varValue [i];
+		return 0;
+	}
+	public void SetValue(string valueName,int value)
+	{
+		int i = varName.IndexOf (valueName);
+		if (i != -1)
+			varValue [i] = value;
+		varName.Add (valueName);
+		varValue.Add (value);
+	}
 	public List<string> GetFriendsLst(string name)
 	{
 		int playerId = ChatManager.Instance.name2Id[name];
