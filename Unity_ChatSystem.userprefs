@@ -2,19 +2,27 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PoolableScrollView.cs">
     <Files>
-      <File FileName="Assets\ChatInstance.cs" Line="15" Column="34" />
-      <File FileName="Assets\Save Manager\XMLSaver.cs" Line="9" Column="22" />
+      <File FileName="Assets\ChatInstance.cs" Line="45" Column="49" />
+      <File FileName="Assets\Save Manager\XMLSaver.cs" Line="14" Column="8" />
       <File FileName="Assets\Save Manager\ChatSaveData.cs" Line="60" Column="49" />
-      <File FileName="Assets\ChatManager.cs" Line="10" Column="32" />
+      <File FileName="Assets\ChatManager.cs" Line="118" Column="14" />
       <File FileName="Assets\UnitySingleton.cs" Line="35" Column="4" />
-      <File FileName="Assets\Node_Editor_Framework\Editor\PairIdCalculator.cs" Line="28" Column="2" />
-      <File FileName="Assets\NodeItemProxy.cs" Line="22" Column="2" />
-      <File FileName="Assets\PoolableScrollView.cs" Line="86" Column="18" />
+      <File FileName="Assets\NodeItemProxy.cs" Line="43" Column="17" />
+      <File FileName="Assets\PoolableScrollView.cs" Line="54" Column="3" />
       <File FileName="Assets\Node_Editor_Framework\Node_Editor\Framework\Core\Node.cs" Line="683" Column="3" />
+      <File FileName="Assets\OptionButton.cs" Line="11" Column="2" />
+      <File FileName="Assets\GameManager.cs" Line="17" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="D:\GitHub\Unity_ChatSystem\Assets\PoolableScrollView.cs" line="59" column="27" />
+      <Breakpoint file="D:\GitHub\Unity_ChatSystem\Assets\PoolableScrollView.cs" line="63" column="1" />
+      <Breakpoint file="D:\GitHub\Unity_ChatSystem\Assets\PoolableScrollView.cs" line="68" column="1" />
+      <Breakpoint file="D:\GitHub\Unity_ChatSystem\Assets\PoolableScrollView.cs" line="72" column="1" />
+      <Breakpoint file="D:\GitHub\Unity_ChatSystem\Assets\PoolableScrollView.cs" line="76" column="1" />
+      <Breakpoint file="D:\GitHub\Unity_ChatSystem\Assets\PoolableScrollView.cs" line="78" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

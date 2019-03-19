@@ -162,8 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77dba1d788a35ce4fb8cac7798c12348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fitter: {fileID: 102634722}
   padding: 20
   prefabId: 0
+  avatar: {fileID: 1055776079}
+  root: {fileID: 1235946221}
+  backGround: {fileID: 1089959741}
+  text: {fileID: 102634720}
+  image: {fileID: 611477966}
   linkedNode: {fileID: 0}
 --- !u!222 &10775353
 CanvasRenderer:
@@ -306,13 +312,17 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 1
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '1234566789898
 
-    7867867867867867'
+    78678678678678679988
+
+    dfdgdfg
+
+    gjghj'
 --- !u!222 &102634721
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -678,7 +688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.1647, y: 893.5}
+  m_AnchoredPosition: {x: 5.1646996, y: 893.5}
   m_SizeDelta: {x: 1090.3, y: 133.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &578788952
@@ -1376,8 +1386,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77dba1d788a35ce4fb8cac7798c12348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fitter: {fileID: 0}
   padding: 20
   prefabId: 0
+  avatar: {fileID: 0}
+  root: {fileID: 0}
+  backGround: {fileID: 0}
+  text: {fileID: 0}
+  image: {fileID: 0}
   linkedNode: {fileID: 0}
 --- !u!222 &1181513092
 CanvasRenderer:

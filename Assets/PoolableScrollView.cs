@@ -54,8 +54,9 @@ public class PoolableScrollView : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		CheckBorder ();
-		//while (CheckBorder()) {}
+		//bool b= CheckBorder ();
+		//Debug.Log (b);
+		while (CheckBorder()) {}
 	}
 	bool CheckBorder()
 	{
@@ -79,7 +80,10 @@ public class PoolableScrollView : MonoBehaviour {
 	}
 	bool TryAddDown()
 	{
-		Node down = _activeItems[_activeItems.Count-1].linkedNode.GetNext();
+		Node linkedNode = _activeItems [_activeItems.Count - 1].linkedNode;
+		Node down = linkedNode.GetNext();
+		if (ChatManager.Instance.curInstance.curRunningNode == down)
+			return false;
 		if (down == null)
 			return false;
 		float height = ChatManager.Instance.curInstance.saveData.totalRectHeight;
