@@ -56,9 +56,24 @@ public class PoolableScrollView : MonoBehaviour {
 		}
 		_activeItems.Add (item);
 	}
+	float borrowHeight = 0.0f;
 	// Update is called once per frame
 	void Update () {
-		while (CheckBorder()) {}
+		while (CheckBorder()) {
+			if (borrowHeight != 0.0f) {
+				contextTrans.sizeDelta = new Vector2 (contextTrans.sizeDelta.x, contextTrans.sizeDelta.y - borrowHeight);
+				for (int i = 0; i < _activeItems.Count; i++) {
+					_activeItems [i].cachedRectTransform.anchoredPosition += new Vector2 (0.0f,borrowHeight);
+				}
+			}
+			if (contextTrans.sizeDelta.y < viewPortTrans.sizeDelta.y) {
+				borrowHeight = viewPortTrans.sizeDelta.y - contextTrans.sizeDelta.y;
+				contextTrans.sizeDelta = new Vector2 (contextTrans.sizeDelta.x,contextTrans.sizeDelta.y+borrowHeight);
+				for (int i = 0; i < _activeItems.Count; i++) {
+					_activeItems [i].cachedRectTransform.anchoredPosition -= new Vector2 (0.0f,borrowHeight);
+				}
+			}
+		}
 	}
 	bool CheckBorder()
 	{
