@@ -103,6 +103,7 @@
      <Compile Include="Assets\Node_Editor_Framework\Node_Editor\Utilities\ReflectionUtility.cs" />
      <Compile Include="Assets\Node_Editor_Framework\Node_Editor\Utilities\ResourceManager.cs" />
      <Compile Include="Assets\NodeItemProxy.cs" />
+     <Compile Include="Assets\OptionButton.cs" />
      <Compile Include="Assets\PoolableScrollView.cs" />
      <Compile Include="Assets\Save Manager\ChatSaveData.cs" />
      <Compile Include="Assets\Save Manager\SaveData.cs" />

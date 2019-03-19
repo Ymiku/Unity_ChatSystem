@@ -38,6 +38,8 @@ public class NodeItemProxy : MonoBehaviour {
 	public float SetData(Node node)
 	{
 		linkedNode = node;
-		return 20.0f;
+		cachedRectTransform.sizeDelta = new Vector2 (640.0f,200.0f);
+		gameObject.SetActive (true);
+		return 220.0f;
 	}
 }

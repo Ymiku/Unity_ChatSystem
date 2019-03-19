@@ -58,8 +58,11 @@ public class ChatManager : Singleton<ChatManager> {
 	{
 		curInstance.PoolDown ();
 	}
-	public void EnterChat(string name1,string name2)
+	public void EnterChat(string name1,string name2 = "")
 	{
+		if (name2 == "")
+			name2 = curName;
+		if(curInstance!=null)
 		curInstance.OnExit ();
 		curInstance = pairId2Instance [GetPairID(name1,name2)];
 		curInstance.OnEnter ();
@@ -139,6 +142,7 @@ public class ChatManager : Singleton<ChatManager> {
 	{
 		int aid = (pairId << 8) + id;
 		int index = poolList.IndexOf (aid);
+		Debug.Log (aid.ToString()+" "+index.ToString());
 		if (index == -1) {
 			GraphCanvasType c = Resources.Load<GraphCanvasType> ("Sections/" + pairId.ToString () + "/" + id.ToString ());
 			c.sectionID = id;
@@ -151,7 +155,7 @@ public class ChatManager : Singleton<ChatManager> {
 			return c;
 		}
 		poolList.RemoveAt (index);
-		poolList.Add (index);
+		poolList.Add (aid);
 		return selectionPool[aid];
 	}
 	void CleanPool(int maxCount)

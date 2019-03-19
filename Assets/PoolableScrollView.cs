@@ -8,6 +8,7 @@ using NodeEditorFramework.Standard;
 public class PoolableScrollView : MonoBehaviour {
 	public NodeItemProxy[] prefabs;
 	Stack<NodeItemProxy>[] _pools;
+	public OptionButton[] optionButtons;
 	#if UNITY_EDITOR
 	[SerializeField]
 	#endif
@@ -17,10 +18,19 @@ public class PoolableScrollView : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		ChatManager.Instance.AddFriend ("Jerry");
 		Init ();
+		ChatManager.Instance.AddFriend ("Jerry");
+		ChatManager.Instance.EnterChat ("Jerry");
+	}
+	public void RefreshFriendsList(List<ChatInstance> chatLst)
+	{
+		
 	}
 	void Init () {
+		ChatManager.Instance.OnRefresh += RefreshFriendsList;
+		for (int i = 0; i < prefabs.Length; i++) {
+			prefabs [i].gameObject.SetActive (false);
+		}
 		viewPortTrans = GetComponent<ScrollRect> ().viewport;
 		contextTrans = GetComponent<ScrollRect> ().content;
 		//_activeItems.Clear ();
@@ -44,7 +54,8 @@ public class PoolableScrollView : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		while (CheckBorder()) {}
+		CheckBorder ();
+		//while (CheckBorder()) {}
 	}
 	bool CheckBorder()
 	{
@@ -108,18 +119,23 @@ public class PoolableScrollView : MonoBehaviour {
 	{
 		if (_pools [index].Count > 0)
 			return _pools [index].Pop ();
-		else
-			return GameObject.Instantiate (prefabs[index]);
+		else {
+			RectTransform t = GameObject.Instantiate (prefabs [index].cachedRectTransform);
+			t.SetParent (contextTrans);
+			t.localScale = Vector3.one;
+			t.anchoredPosition3D = Vector3.zero;
+			return t.GetComponent<NodeItemProxy> ();
+		}
 	}
 	void Pool(NodeItemProxy node)
 	{
 		_activeItems.Remove (node);
 		node.gameObject.SetActive (false);
+		_pools [node.prefabId].Push (node);
 	}
 	bool NeedCull(NodeItemProxy node)
 	{
 		if(_activeItems.IndexOf(node)==0)
-		Debug.Log ((node.pos.y - node.height).ToString());
 		if (node.pos.y - node.height + contextTrans.anchoredPosition.y > 0)
 			return true;
 		if (node.pos.y + contextTrans.anchoredPosition.y < -viewPortTrans.sizeDelta.y)

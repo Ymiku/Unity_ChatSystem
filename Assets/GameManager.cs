@@ -12,6 +12,10 @@ public class GameManager : UnitySingleton<GameManager> {
 	public int localTime{
 		get{ return (int)_localTime;}
 	}
+	void Awake()
+	{
+		OnEnterGame ();
+	}
 	void OnEnterGame()
 	{
 		//load
