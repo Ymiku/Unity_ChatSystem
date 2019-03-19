@@ -24,7 +24,7 @@ MonoBehaviour:
   - {fileID: 114475150850351016}
   groups: []
   sectionID: 0
-  rootNode: {fileID: 0}
+  rootNode: {fileID: 114498494705645254}
 --- !u!114 &114034709551741458
 MonoBehaviour:
   m_ObjectHideFlags: 1
