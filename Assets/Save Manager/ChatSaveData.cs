@@ -70,7 +70,6 @@ public class ChatInstanceData
 	public int curSectionId;
 	public int curNodeId;
 	public long lastChatTimeStamp;
-	public float totalRectHeight = 0.0f;
 	public List<int> nodeIds = new List<int>();
 	public List<int> nodeOptions = new List<int>();
 
@@ -79,14 +78,5 @@ public class ChatInstanceData
 	public int GetOption(Node node)
 	{
 		return nodeOptions [nodeIds.IndexOf (node.nodeId+(node.sectionId<<8))];
-	}
-	public bool HasCalHeight(Node node)
-	{
-		return nodeIdsForHeight.IndexOf (node.nodeId+(node.sectionId<<8)) != -1;
-	}
-	public void SetHasCalHeight(Node node)
-	{
-		if (nodeIdsForHeight.IndexOf (node.nodeId + (node.sectionId << 8)) == -1)
-			nodeIdsForHeight.Add (node.nodeId + (node.sectionId << 8));
 	}
 }

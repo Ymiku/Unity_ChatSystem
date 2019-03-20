@@ -27,7 +27,6 @@ public class ChatInstance{
 		Node front = curRunningNode.GetFront ();
 		if (front != null)
 			lastSentence = GetLastSentence (front);
-		totalRectHeight = saveData.totalRectHeight;
 	}
 	public void OnEnter()
 	{
