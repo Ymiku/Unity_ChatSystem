@@ -751,16 +751,16 @@ namespace UnityEngine.UI
 
             UpdateBounds();
 
-            //var pointerDelta = localCursor - m_PointerStartLocalCursor;
-            //Vector2 position = m_ContentStartPosition + pointerDelta;
-			var pointerDelta = localCursor - lastCusor;
-			lastCusor = localCursor;
-			Vector2 position = m_Content.anchoredPosition + pointerDelta;
+            var pointerDelta = localCursor - m_PointerStartLocalCursor;
+            Vector2 position = m_ContentStartPosition + pointerDelta;
+			//var pointerDelta = localCursor - lastCusor;
+			//lastCusor = localCursor;
+			//Vector2 position = m_Content.anchoredPosition + pointerDelta;
 
             // Offset to get content into place in the view.
             Vector2 offset = CalculateOffset(position - m_Content.anchoredPosition);
-            position += offset;
-            if (m_MovementType == MovementType.Elastic)
+            //position += offset;
+            if (false&&m_MovementType == MovementType.Elastic)
             {
                 if (offset.x != 0)
                     position.x = position.x - RubberDelta(offset.x, m_ViewBounds.size.x);
@@ -792,7 +792,6 @@ namespace UnityEngine.UI
         {
             if (!m_Content)
                 return;
-
             EnsureLayoutHasRebuilt();
             UpdateBounds();
             float deltaTime = Time.unscaledDeltaTime;
@@ -806,7 +805,7 @@ namespace UnityEngine.UI
                     if (m_MovementType == MovementType.Elastic && offset[axis] != 0)
                     {
                         float speed = m_Velocity[axis];
-                        position[axis] = Mathf.SmoothDamp(m_Content.anchoredPosition[axis], m_Content.anchoredPosition[axis] + offset[axis], ref speed, m_Elasticity, Mathf.Infinity, deltaTime);
+                        position[axis] = Mathf.SmoothDamp(m_Content.anchoredPosition[axis], m_Content.anchoredPosition[axis] + offset[axis], ref speed, m_Elasticity, Mathf.Infinity);
                         if (Mathf.Abs(speed) < 1)
                             speed = 0;
                         m_Velocity[axis] = speed;

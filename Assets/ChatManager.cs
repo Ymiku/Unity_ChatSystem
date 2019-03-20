@@ -91,7 +91,8 @@ public class ChatManager : Singleton<ChatManager> {
 			}
 			orderedInstance.Add (item);
 		}
-		OnRefresh (orderedInstance);
+		if(OnRefresh!=null)
+			OnRefresh (orderedInstance);
 	}
 	//
 	public void OnEnter(string name)

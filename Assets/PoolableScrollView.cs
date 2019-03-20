@@ -18,32 +18,32 @@ public class PoolableScrollView : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		Init ();
+		ChatManager.Instance.OnRefresh += RefreshFriendsList;
 		ChatManager.Instance.AddFriend ("Jerry");
 		ChatManager.Instance.EnterChat ("Jerry");
-		borrowHeight = 0.0f;
-		borrowNodes.Clear ();
-		contextTrans.sizeDelta = new Vector2(contextTrans.sizeDelta.x,ChatManager.Instance.curInstance.saveData.totalRectHeight);
-
+		Init ();
 	}
 	public void RefreshFriendsList(List<ChatInstance> chatLst)
 	{
 		
 	}
 	void Init () {
-		ChatManager.Instance.OnRefresh += RefreshFriendsList;
 		for (int i = 0; i < prefabs.Length; i++) {
 			prefabs [i].gameObject.SetActive (false);
 		}
 		viewPortTrans = GetComponent<FScrollRect> ().viewport;
 		contextTrans = GetComponent<FScrollRect> ().content;
-		//_activeItems.Clear ();
+		_activeItems.Clear ();
 		_pools = new Stack<NodeItemProxy>[prefabs.Length];
 		for (int i = 0; i < _pools.Length; i++) {
 			_pools [i] = new Stack<NodeItemProxy> ();
 		}
-
-
+		contextTrans.anchoredPosition = Vector2.zero;
+		contextTrans.sizeDelta = new Vector2(contextTrans.sizeDelta.x,ChatManager.Instance.curInstance.saveData.totalRectHeight);
+		if (contextTrans.sizeDelta.y < viewPortTrans.sizeDelta.y) {
+			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, viewPortTrans.sizeDelta.y);
+			borrowHeight = viewPortTrans.sizeDelta.y-contextTrans.sizeDelta.y;
+		}
 	}
 	void TryOpen()
 	{
@@ -53,28 +53,38 @@ public class PoolableScrollView : MonoBehaviour {
 		NodeItemProxy item = GetItem (front.name==ChatManager.Instance.curName?1:0);
 		float itemHeight = item.SetData (front);
 		item.cachedRectTransform.anchoredPosition = new Vector2 (0.0f,itemHeight-contextTrans.sizeDelta.y);
-		Debug.Log (front.hasCalHeight);
 		if (!front.hasCalHeight) {
 			front.hasCalHeight = true;
 			ChatManager.Instance.curInstance.saveData.totalRectHeight += itemHeight;
 			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, contextTrans.sizeDelta.y + itemHeight);
-			Debug.Log (contextTrans.sizeDelta);
 			item.cachedRectTransform.anchoredPosition = new Vector2 (0.0f, itemHeight - contextTrans.sizeDelta.y);
 		}
 		_activeItems.Add (item);
 	}
 	float borrowHeight = 0.0f;
-	List<NodeItemProxy> borrowNodes = new List<NodeItemProxy>();
 	// Update is called once per frame
-	void Update () {
-		Vector2 size = contextTrans.sizeDelta;
-		if (borrowHeight != 0.0f) {
-			size = new Vector2 (contextTrans.sizeDelta.x, contextTrans.sizeDelta.y - borrowHeight);
-			borrowHeight = 0.0f;
+	void AddActiveNodeY(float h)
+	{
+		for (int i = 0; i < _activeItems.Count; i++) {
+			_activeItems [i].cachedRectTransform.anchoredPosition += new Vector2 (0.0f,h);
 		}
+	}
+	void Update () {
 		int i = 0;
 		while (CheckBorder()&&i<100) {
 			i++;
+		}
+		if (false&&borrowHeight >111120.0f&&contextTrans.sizeDelta.y > viewPortTrans.sizeDelta.y) {
+			float a = contextTrans.sizeDelta.y - viewPortTrans.sizeDelta.y;
+			if (a > borrowHeight) {
+				contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical,contextTrans.sizeDelta.y-borrowHeight);
+				borrowHeight = 0.0f;
+				AddActiveNodeY (borrowHeight);
+			} else {
+				contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical,contextTrans.sizeDelta.y-a);
+				borrowHeight -= a;
+				AddActiveNodeY (a);
+			}
 		}
 		/*
 		if (size.y < viewPortTrans.sizeDelta.y) {
@@ -117,14 +127,13 @@ public class PoolableScrollView : MonoBehaviour {
 			return false;
 		if (ChatManager.Instance.curInstance.curRunningNode == down)
 			return false;
-		float height = ChatManager.Instance.curInstance.saveData.totalRectHeight;
 		NodeItemProxy item = GetItem (down.name==ChatManager.Instance.curName?1:0);
 		float itemHeight = item.SetData (down);
 		float itemY = _activeItems [_activeItems.Count - 1].cachedRectTransform.anchoredPosition.y - _activeItems [_activeItems.Count - 1].height;
 		if (!down.hasCalHeight) {
 			down.hasCalHeight = true;
 			ChatManager.Instance.curInstance.saveData.totalRectHeight += itemHeight;
-			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, height + itemHeight);
+			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, contextTrans.sizeDelta.y + itemHeight);
 		}
 		item.cachedRectTransform.anchoredPosition = new Vector2 (0.0f,itemY);
 		_activeItems.Add (item);
