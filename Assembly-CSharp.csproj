@@ -59,6 +59,7 @@
      <Compile Include="Assets\ChatNode\GraphCanvasType.cs" />
      <Compile Include="Assets\ChatNode\RootGraphNode.cs" />
      <Compile Include="Assets\ChatNode\SetParamNode.cs" />
+     <Compile Include="Assets\FScrollRect.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\Node_Editor_Framework\Node_Editor\Default\Calculation Base\CalculationCanvasType.cs" />
      <Compile Include="Assets\Node_Editor_Framework\Node_Editor\Default\Calculation Base\CanvasCalculator.cs" />
@@ -106,6 +107,7 @@
      <Compile Include="Assets\NodeItemProxy.cs" />
      <Compile Include="Assets\OptionButton.cs" />
      <Compile Include="Assets\PoolableScrollView.cs" />
+     <Compile Include="Assets\qweqwe.cs" />
      <Compile Include="Assets\Save Manager\ChatSaveData.cs" />
      <Compile Include="Assets\Save Manager\SaveData.cs" />
      <Compile Include="Assets\Save Manager\XMLSaver.cs" />

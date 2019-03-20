@@ -142,7 +142,6 @@ public class ChatManager : Singleton<ChatManager> {
 	{
 		int aid = (pairId << 8) + id;
 		int index = poolList.IndexOf (aid);
-		Debug.Log (aid.ToString()+" "+index.ToString());
 		if (index == -1) {
 			GraphCanvasType c = Resources.Load<GraphCanvasType> ("Sections/" + pairId.ToString () + "/" + id.ToString ());
 			c.sectionID = id;

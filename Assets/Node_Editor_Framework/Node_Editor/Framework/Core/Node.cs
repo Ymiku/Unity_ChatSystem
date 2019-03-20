@@ -17,7 +17,12 @@ namespace NodeEditorFramework
 		}
 
 		//use at runtime
-		public bool hasCalHeight = false;
+		public bool hasCalHeight{
+			get{ return ChatManager.Instance.curInstance.saveData.HasCalHeight (this); }
+			set{ if (value)
+					ChatManager.Instance.curInstance.saveData.SetHasCalHeight (this);
+			}
+		}
 		[NonSerialized]
 		public int nodeId;
 		public int sectionId;
