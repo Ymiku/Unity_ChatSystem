@@ -40,7 +40,7 @@ public class PoolableScrollView : MonoBehaviour {
 		}
 		contextTrans.anchoredPosition = Vector2.zero;
 		contextTrans.sizeDelta = new Vector2(contextTrans.sizeDelta.x,ChatManager.Instance.curInstance.saveData.totalRectHeight);
-		if (contextTrans.sizeDelta.y < viewPortTrans.sizeDelta.y) {
+		if (false&&contextTrans.sizeDelta.y < viewPortTrans.sizeDelta.y) {
 			contextTrans.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, viewPortTrans.sizeDelta.y);
 			borrowHeight = viewPortTrans.sizeDelta.y-contextTrans.sizeDelta.y;
 		}
@@ -102,6 +102,12 @@ public class PoolableScrollView : MonoBehaviour {
 			TryOpen ();
 			return false;
 		}
+		if (_activeItems [0].pos.y + contextTrans.anchoredPosition.y < 0 && TryAddUp ())
+			return true;
+		if (_activeItems [_activeItems.Count - 1].pos.y - _activeItems [_activeItems.Count - 1].height + contextTrans.anchoredPosition.y > -viewPortTrans.sizeDelta.y && TryAddDown ())
+			return true;
+		if (_activeItems.Count <= 1)
+			return false;
 		if (NeedCull (_activeItems [0])) {
 			PoolUp (_activeItems [0]);
 			return true;
@@ -110,10 +116,7 @@ public class PoolableScrollView : MonoBehaviour {
 			PoolDown (_activeItems [_activeItems.Count-1]);
 			return true;
 		}
-		if (_activeItems [0].pos.y + contextTrans.anchoredPosition.y < 0 && TryAddUp ())
-			return true;
-		if (_activeItems [_activeItems.Count - 1].pos.y + _activeItems [_activeItems.Count - 1].height + contextTrans.anchoredPosition.y > -viewPortTrans.sizeDelta.y && TryAddDown ())
-			return true;
+
 		return false;
 	}
 	bool TryAddDown()
@@ -125,6 +128,7 @@ public class PoolableScrollView : MonoBehaviour {
 		}
 		if (down == null)
 			return false;
+
 		if (ChatManager.Instance.curInstance.curRunningNode == down)
 			return false;
 		NodeItemProxy item = GetItem (down.name==ChatManager.Instance.curName?1:0);
@@ -170,7 +174,7 @@ public class PoolableScrollView : MonoBehaviour {
 	void PoolDown(NodeItemProxy node)
 	{
 		Pool (node);
-		contextTrans.sizeDelta = new Vector2 (contextTrans.sizeDelta.x,contextTrans.sizeDelta.y-node.height);
+		//contextTrans.sizeDelta = new Vector2 (contextTrans.sizeDelta.x,contextTrans.sizeDelta.y-node.height);
 	}
 	NodeItemProxy GetItem(int index)
 	{
@@ -192,10 +196,11 @@ public class PoolableScrollView : MonoBehaviour {
 	}
 	bool NeedCull(NodeItemProxy node)
 	{
+		float buffer = 100.0f;
 		if(_activeItems.IndexOf(node)==0)
-		if (node.pos.y - node.height + contextTrans.anchoredPosition.y > 0)
+		if (node.pos.y - node.height + contextTrans.anchoredPosition.y > 0+buffer)
 			return true;
-		if (node.pos.y + contextTrans.anchoredPosition.y < -viewPortTrans.sizeDelta.y)
+		if (node.pos.y + contextTrans.anchoredPosition.y < -viewPortTrans.sizeDelta.y-buffer)
 			return true;
 		return false;
 	}
