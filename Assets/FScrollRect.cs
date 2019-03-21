@@ -751,15 +751,20 @@ namespace UnityEngine.UI
 
             UpdateBounds();
 
-            var pointerDelta = localCursor - m_PointerStartLocalCursor;
-            Vector2 position = m_ContentStartPosition + pointerDelta;
-			//var pointerDelta = localCursor - lastCusor;
-			//lastCusor = localCursor;
-			//Vector2 position = m_Content.anchoredPosition + pointerDelta;
+            //var pointerDelta = localCursor - m_PointerStartLocalCursor;
+            //Vector2 position = m_ContentStartPosition + pointerDelta;
+			var pointerDelta = localCursor - lastCusor;
+			lastCusor = localCursor;
 
-            // Offset to get content into place in the view.
+			Vector2 offset = CalculateOffset(Vector2.zero);
+			pointerDelta -= pointerDelta*(Mathf.Min(offset.y,400.0f)*0.0025f);
+			pointerDelta += pointerDelta*(Mathf.Max(offset.y,-400.0f)*0.0025f);
+
+			Vector2 position = m_Content.anchoredPosition + pointerDelta;
+
+            /* Offset to get content into place in the view.
             Vector2 offset = CalculateOffset(position - m_Content.anchoredPosition);
-            //position += offset;
+            position += offset;
             if (false&&m_MovementType == MovementType.Elastic)
             {
                 if (offset.x != 0)
@@ -767,7 +772,7 @@ namespace UnityEngine.UI
                 if (offset.y != 0)
                     position.y = position.y - RubberDelta(offset.y, m_ViewBounds.size.y);
             }
-
+			*/
             SetContentAnchoredPosition(position);
         }
 

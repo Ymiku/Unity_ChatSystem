@@ -5,7 +5,7 @@ using NodeEditorFramework;
 using NodeEditorFramework.Standard;
 public class ChatInstance{
 	int curPairID = 0;
-	public Node curRunningNode;
+	public Node curRunningNode = null;
 	GraphCanvasType curSection;
 	public long lastChatTimeStamp;
 	float totalRectHeight = 0.0f;
@@ -23,7 +23,8 @@ public class ChatInstance{
 		saveData = XMLSaver.saveData.GetInstanceData (curPairID);
 		lastChatTimeStamp = saveData.lastChatTimeStamp;
 		curSection = ChatManager.Instance.LoadSectionByID(curPairID,saveData.curSectionId);
-		curRunningNode = curSection.nodes [saveData.curNodeId];
+		if(saveData.curNodeId!=-1)
+			curRunningNode = curSection.nodes [saveData.curNodeId];
 		Node front = curRunningNode.GetFront ();
 		if (front != null)
 			lastSentence = GetLastSentence (front);
@@ -36,13 +37,20 @@ public class ChatInstance{
 	}
 	public void OnExecute()
 	{
+		if (curRunningNode == null) {
+			return;
+		}
 		bool hasFinished = true;
-		while (hasFinished) {
+		while (hasFinished&&curRunningNode!=null) {
 			hasFinished = false;
 			hasFinished = curRunningNode.Execute();
 			if (hasFinished) {
 				lastSentence = GetLastSentence (curRunningNode);
 				curRunningNode = curRunningNode.GetNext ();
+				if (curRunningNode == null) {
+					saveData.curNodeId = -1;
+					return;
+				}
 			}
 		}
 		curSection = ChatManager.Instance.LoadSectionByID (curPairID,curRunningNode.sectionId);
