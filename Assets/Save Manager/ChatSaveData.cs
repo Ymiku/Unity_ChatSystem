@@ -76,9 +76,25 @@ public class ChatInstanceData
 
 	public List<int> nodeIdsForHeight = new List<int>();
 	//section<<8+id
+	public void AddOption(Node node,int option)
+	{
+		int index = nodeIds.IndexOf (node.nodeId + (node.sectionId << 8));
+		if (index == -1) {
+			nodeIds.Add (node.nodeId + (node.sectionId << 8));
+			nodeOptions.Add (option);
+		} else {
+			nodeOptions [index] = option;
+		}
+	}
 	public int GetOption(Node node)
 	{
-		return nodeOptions [nodeIds.IndexOf (node.nodeId+(node.sectionId<<8))];
+		int index = nodeIds.IndexOf (node.nodeId + (node.sectionId << 8));
+		if (index == -1) {
+			nodeIds.Add (node.nodeId + (node.sectionId << 8));
+			nodeOptions.Add (-2);
+			return -2;
+		}
+		return nodeOptions [index];
 	}
 	public bool HasCalHeight(Node node)
 	{

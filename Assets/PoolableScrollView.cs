@@ -8,7 +8,6 @@ using NodeEditorFramework.Standard;
 public class PoolableScrollView : MonoBehaviour {
 	public NodeItemProxy[] prefabs;
 	Stack<NodeItemProxy>[] _pools;
-	public OptionButton[] optionButtons;
 	#if UNITY_EDITOR
 	[SerializeField]
 	#endif

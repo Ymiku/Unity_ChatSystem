@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using NodeEditorFramework.Utilities;
 using UnityEditor;
+using System;
 namespace NodeEditorFramework.Standard
 {
 	[Node(false, "Chat/Option Node")]
@@ -67,15 +68,60 @@ namespace NodeEditorFramework.Standard
 		{
 			if (dynamicConnectionPorts.Count == 0)
 				return null;
-			return dynamicConnectionPorts[GetOptionID()].body;
+			return dynamicConnectionPorts[option].connections[0].body;
 		}
 		int GetOptionID()
 		{
-			return 0;
+			return option;
 		}
 		public override string GetLastSentence (ChatInstanceData data = null)
 		{
 			return labels[data.GetOption(this)];
+		}
+		public int option{
+			get{ return ChatManager.Instance.curInstance.saveData.GetOption (this);}
+			set{ ChatManager.Instance.curInstance.saveData.AddOption (this, value);}
+		}
+		public override bool Execute()
+		{
+			if (ChatManager.Instance.curInstance.curRunningNode != this)
+				return false;
+			switch (cond) {
+			case Cond.Instance:
+				if (option == -2)
+					option++;
+				return option>=0;
+			case Cond.WaitSeconds:
+				if (option == -2)
+					option++;
+				if (startTime == -1) {
+					startTime = GameManager.Instance.localTime;
+				}
+				if (GameManager.Instance.localTime - startTime >= condParam) {
+					startTime = -1;
+					return true;
+				}
+				break;
+			case Cond.WaitMinutes:
+				if (option == -2)
+					option++;
+				if (startTime == -1) {
+					startTime = GameManager.Instance.localTime;
+				}
+				if (GameManager.Instance.localTime - startTime >= condParam*60) {
+					startTime = -1;
+					return true;
+				}
+				break;
+			case Cond.ControlByVar:
+				if (XMLSaver.saveData.Check (condName, condParam))
+					option = -1;
+				return option>=0;//XMLSaver.saveData.Check (condName,condParam);
+				break;
+			default:
+				break;
+			}
+			return false;
 		}
 	}
 }
