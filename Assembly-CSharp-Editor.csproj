@@ -57,8 +57,6 @@
      <Compile Include="Assets\Node_Editor_Framework\Editor\Node_Editor\RTCanvasCalculatorEditor.cs" />
      <Compile Include="Assets\Node_Editor_Framework\Editor\Node_Editor\RTNodeEditorInspector.cs" />
      <Compile Include="Assets\Node_Editor_Framework\Editor\PairIdCalculator.cs" />
-     <Compile Include="Assets\SuperScrollView\Editor\LoopListViewEditor2.cs" />
-     <None Include="Assets\SuperScrollView\Scripts\Version 2.2.txt" />
      <None Include="Assets\Node_Editor_Framework\Node_Editor\Resources\Shader\LineShader.shader" />
      <None Include="Assets\Resources\Sections\names2Id.txt" />
      <None Include="Assets\Node_Editor_Framework\Node_Editor\Utilities\link.xml" />
