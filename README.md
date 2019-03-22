@@ -1,1 +1,3 @@
 # Unity_ChatSystem
+chatinstance为一个聊天实例，即两个人的聊天。如A和B聊是一个实例，B和C也是一个实例，如主角为A，则实例数量为A的好友数
+ChatManager控制所有的聊天实例，会更新每个实例，当有新消息时会通知视图层
